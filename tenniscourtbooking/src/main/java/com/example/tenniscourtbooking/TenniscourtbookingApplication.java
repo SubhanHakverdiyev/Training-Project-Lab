@@ -9,5 +9,5 @@ public class TenniscourtbookingApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TenniscourtbookingApplication.class, args);
 	}
-
+// starting database server : pg_ctl -D /usr/local/var/postgresql@14 start
 }

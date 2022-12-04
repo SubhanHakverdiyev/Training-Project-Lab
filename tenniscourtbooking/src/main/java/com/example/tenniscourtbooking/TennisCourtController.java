@@ -17,7 +17,7 @@ public class TennisCourtController {
         this.courtRepository = courtRepository;
     }
 
-    @GetMapping("/courtSchedule")
+    @GetMapping("/listSchedules")
     public CourtSchedule courtSchedule(@RequestParam(value = "name") String name) {
        return new CourtSchedule(courtRepository.getScheduleList().get(0).getId(), courtRepository.getScheduleList().get(0).getName(),
                courtRepository.getScheduleList().get(0).getDate(), courtRepository.getScheduleList().get(0).getCourtNumber());
@@ -27,6 +27,9 @@ public class TennisCourtController {
     public void schedule(@RequestBody() ScheduleRequest scheduleRequest) {
                 scheduleService.create(scheduleRequest);
     }
+
+
+
 }
   //   curl -i -H "Content-Type: application/json" -X POST -d "{\"name\": \"subhan\", \"date\": \"03/11/2022\", \"courtNumber\": \"2\"}" http://localhost:8080/schedule
 //curl -i -H "Content-Type: application/json" -X POST -d "{\"name\": \"Subhan\"}" http://localhost:8080/schedule

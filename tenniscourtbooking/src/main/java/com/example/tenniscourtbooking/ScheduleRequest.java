@@ -12,6 +12,7 @@ public class ScheduleRequest {
     private final AtomicLong counter = new AtomicLong();
     private long id = 0;
     private String name;
+    private String courtType;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -19,11 +20,12 @@ public class ScheduleRequest {
 
     private int courtNumber;
 
-    public ScheduleRequest(String name, LocalDate date, int courtNumber) {
+    public ScheduleRequest(String name, LocalDate date, int courtNumber, String courtType) {
         id = counter.incrementAndGet();
         this.name = name;
         this.date = date;
         this.courtNumber  = courtNumber;
+        this.courtType = courtType;
     }
     public ScheduleRequest(){
     }
@@ -47,6 +49,7 @@ public class ScheduleRequest {
     public void setDate(LocalDate date) {
         this.date = date;
     }
+
     public int getCourtNumber() {
         return courtNumber;
     }
@@ -54,5 +57,10 @@ public class ScheduleRequest {
     public void setCourtNumber(int courtNumber) {
         this.courtNumber = courtNumber;
     }
+
+    public String getCourtType(){ return courtType;}
+
+    public void setCourtType() { this.courtType = courtType; }
+
 
 }
