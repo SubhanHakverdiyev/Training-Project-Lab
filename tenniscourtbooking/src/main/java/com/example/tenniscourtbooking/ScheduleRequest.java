@@ -1,7 +1,6 @@
 package com.example.tenniscourtbooking;
 
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,10 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ScheduleRequest {
 
-    private final AtomicLong counter = new AtomicLong();
-    private long id = 0;
-    private String name;
-    private String courtType;
+    private String email;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -20,26 +16,24 @@ public class ScheduleRequest {
 
     private int courtNumber;
 
-    public ScheduleRequest(String name, LocalDate date, int courtNumber, String courtType) {
-        id = counter.incrementAndGet();
-        this.name = name;
+    private String type;
+
+
+    public ScheduleRequest(String email, LocalDate date, int courtNumber, String type) {
+        this.email = email;
         this.date = date;
         this.courtNumber  = courtNumber;
-        this.courtType = courtType;
+        this.type = type;
     }
     public ScheduleRequest(){
     }
 
-    public Long getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public LocalDate getDate() {
@@ -58,9 +52,9 @@ public class ScheduleRequest {
         this.courtNumber = courtNumber;
     }
 
-    public String getCourtType(){ return courtType;}
+    public String getType(){ return type;}
 
-    public void setCourtType() { this.courtType = courtType; }
+    public void setType(String type) { this.type = type; }
 
 
 }

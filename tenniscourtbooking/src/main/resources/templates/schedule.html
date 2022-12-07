@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration and Login System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Schedule system</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+    </div>
+</nav>
+<br /><br /><br />
+<div class="container">
+    <div class="row col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-center">Schedule</h2>
+            </div>
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    You have successfully created schedule!
+                </div>
+            </div>
+            <div class="card-body">
+                <form
+                        method="post"
+                        role="form"
+                        th:action="@{/schedule/save}"
+                        th:object="${schedule}"
+                >
+                    <div class="form-group mb-3">
+                        <label class="form-label">Email</label>
+                        <input
+                                class="form-control"
+                                id="email"
+                                name="email"
+                                placeholder="Enter email address"
+                                th:field="*{email}"
+                                type="email"
+                        />
+                        <p th:errors = "*{email}" class="text-danger"
+                           th:if="${#fields.hasErrors('email')}"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label class="form-label">Date</label>
+                        <input
+                                class="form-control"
+                                id="date"
+                                name="date"
+                                placeholder="Enter the date"
+                                th:field="*{date}"
+                                type="date"
+                        />
+                        <p th:errors = "*{date}" class="text-danger"
+                           th:if="${#fields.hasErrors('date')}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Court Number</label>
+                        <input
+                                class="form-control"
+                                id="courtNumber"
+                                name="courtNumber"
+                                placeholder="Enter court number"
+                                th:field="*{courtNumber}"
+                                type="number"
+                        />
+                        <p th:errors = "*{courtNumber}" class="text-danger"
+                           th:if="${#fields.hasErrors('courtNumber')}"></p>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label class="form-label">Enter Court Type</label>
+                        <input
+                                class="form-control"
+                                id="type"
+                                name="type"
+                                placeholder="Enter court type"
+                                th:field="*{type}"
+                                type="text"
+                        />
+                        <p th:errors = "*{type}" class="text-danger"
+                           th:if="${#fields.hasErrors('type')}"></p>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="submit">Schedule</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

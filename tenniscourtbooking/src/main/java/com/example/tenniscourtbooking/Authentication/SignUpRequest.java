@@ -3,18 +3,20 @@ package com.example.tenniscourtbooking.Authentication;
 public class SignUpRequest {
     private String name;
 
-    private String lastname;
+    private String lastName;
 
     private String email;
 
     private String password;
 
-    public SignUpRequest(String name, String lastname, String email, String password) {
+    public SignUpRequest(String name, String lastName, String email, String password) {
         this.name = name;
-        this.lastname = lastname;
+        this.lastName = lastName;
         this.email = email;
         this.password = password;
     }
+
+    public SignUpRequest() {}
 
     public String getName() {
         return name;
@@ -24,12 +26,12 @@ public class SignUpRequest {
         this.name = name;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {

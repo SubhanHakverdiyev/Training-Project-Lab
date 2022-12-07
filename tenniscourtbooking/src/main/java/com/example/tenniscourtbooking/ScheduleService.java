@@ -1,11 +1,7 @@
 package com.example.tenniscourtbooking;
 
-import java.time.LocalDate;
-import java.util.Date;
-
 import javax.inject.Inject;
 
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 
@@ -16,10 +12,12 @@ public class ScheduleService {
     CourtRepository courtRepository;
 
     public void  create(ScheduleRequest scheduleRequest){
-            CourtSchedule courtSchedule = new CourtSchedule(scheduleRequest.getId(),
-                    scheduleRequest.getName(), scheduleRequest.getDate(), scheduleRequest.getCourtNumber());
-            courtRepository.add(courtSchedule);
-            System.out.println(courtRepository.scheduleList);
+            CourtSchedule courtSchedule = new CourtSchedule();
+            courtSchedule.setEmail(scheduleRequest.getEmail());
+            courtSchedule.setDate(scheduleRequest.getDate());
+            courtSchedule.setCourtNumber(scheduleRequest.getCourtNumber());
+            courtSchedule.setType(scheduleRequest.getType());
+            courtRepository.save(courtSchedule);
 
     }
 }

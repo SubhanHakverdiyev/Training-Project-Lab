@@ -1,32 +1,43 @@
 package com.example.tenniscourtbooking;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import javax.inject.Inject;
 
-@RestController
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.stereotype.Controller;
+
+
+@Controller
 public class TennisCourtController {
 
+    @Inject
     private  ScheduleService scheduleService;
-    private CourtRepository courtRepository;
 
-    public TennisCourtController(ScheduleService scheduleService, CourtRepository courtRepository) {
-        this.scheduleService = scheduleService;
-        this.courtRepository = courtRepository;
+    @GetMapping(value = "/schedule")
+    public String getSchedule(Model model) {
+        ScheduleRequest scheduleRequest = new ScheduleRequest();
+        model.addAttribute("schedule", scheduleRequest);
+        return "schedule";
     }
 
-    @GetMapping("/listSchedules")
-    public CourtSchedule courtSchedule(@RequestParam(value = "name") String name) {
-       return new CourtSchedule(courtRepository.getScheduleList().get(0).getId(), courtRepository.getScheduleList().get(0).getName(),
-               courtRepository.getScheduleList().get(0).getDate(), courtRepository.getScheduleList().get(0).getCourtNumber());
+
+//    @GetMapping("/listSchedules")
+//    public CourtSchedule courtSchedule(@RequestParam(value = "name") String name) {
+//       return new CourtSchedule(courtRepository.getScheduleList().get(0).getId(), courtRepository.getScheduleList().get(0).getName(),
+//               courtRepository.getScheduleList().get(0).getDate(), courtRepository.getScheduleList().get(0).getCourtNumber());
+//    }
+
+    @PostMapping(value="/schedule/save")
+    public String schedule(@ModelAttribute("schedule") ScheduleRequest scheduleRequest, Model model){
+           System.out.println(scheduleRequest.getType());
+            scheduleService.create(scheduleRequest);
+
+            return "redirect:/schedule?success";
     }
 
-    @PostMapping(value="/schedule")
-    public void schedule(@RequestBody() ScheduleRequest scheduleRequest) {
-                scheduleService.create(scheduleRequest);
-    }
+
 
 
 
