@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 
 
 @Controller
-public class TennisCourtController {
+public class ScheduleController {
 
     @Inject
     private  ScheduleService scheduleService;
@@ -34,7 +34,7 @@ public class TennisCourtController {
            System.out.println(scheduleRequest.getType());
             scheduleService.create(scheduleRequest);
 
-            return "redirect:/schedule?success";
+            return "redirect:/payment";
     }
 
 

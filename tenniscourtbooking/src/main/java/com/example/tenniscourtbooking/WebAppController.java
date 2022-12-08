@@ -17,6 +17,7 @@ public class WebAppController {
         return "index";
     }
 
-
+    @GetMapping("/payment")
+    public String getPayment () { return "payment"; }
 
 }
